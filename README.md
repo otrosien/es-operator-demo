@@ -3,7 +3,7 @@
 
 [[slides.pptx](slides.pptx)] [[slides.pdf](slides.pdf)] [[Google Slides](https://docs.google.com/presentation/d/1RTgNHIbHmPUccfjyn4X44xwMc0i_-u92r6G-mYRCGNM/present)]
 
-This demo is part of the talk 'Operating Elasticsearch in Kubernetes' by Mikkel Larsen and Oliver Trosien. It goes step-by-stop through the eployment of the [ES Operator](https://github.com/zalando-incubator/es-operator) into Kubernetes, and creation and scaling of an Elasticsearch cluster.
+This demo is part of the talk 'Operating Elasticsearch in Kubernetes' by Mikkel Larsen and Oliver Trosien. It goes step-by-stop through the deployment of the [ES Operator](https://github.com/zalando-incubator/es-operator) into Kubernetes, and creation and scaling of an Elasticsearch cluster.
 
 ### Steps
 
