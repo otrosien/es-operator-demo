@@ -16,7 +16,7 @@ zkubectl apply -f manifests/es-operator.yaml
 Watch the logs
 
 ```
-stern -n microxchg es
+zkubectl logtail -n microxchg es
 ```
 
 Watch resource creation
@@ -46,7 +46,7 @@ zkubectl -n microxchg port-forward `zkubectl -n microxchg get pods -l applicatio
 Create an index
 
 ```
-http PUT localhost:9200/microxchg Content-type:application/json number_of_shards=20 number_of_replicas=2
+curl -XPUT localhost:9200/microxchg -HContent-type:application/json -d '{"number_of_shards":20, "number_of_replicas":2}'
 ```
 
 Upgrade Elasticsearch (set image version to 6.6.2)
