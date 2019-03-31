@@ -37,13 +37,19 @@ Create first EDS
 zkubectl apply -f manifests/data-group1.yaml
 ```
 
+Tunnel into Elasticsearch
+
+```
+zkubectl -n microxchg port-forward `zkubectl -n microxchg get pods -l application=elasticsearch,role=master -o custom-columns=:metadata.name --no-headers | head -n 1` 9200
+```
+
 Create an index
 
 ```
 http PUT localhost:9200/microxchg Content-type:application/json number_of_shards=20 number_of_replicas=2
 ```
 
-Upgrade Elasticsearch (set image version to 6.7.0)
+Upgrade Elasticsearch (set image version to 6.6.2)
 
 ```
 zkubectl -n microxchg edit eds es-data-microxchg
