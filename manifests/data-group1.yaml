@@ -17,13 +17,13 @@ spec:
     maxReplicas: 3
     minShardsPerNode: 10
     maxShardsPerNode: 20
-    minIndexReplicas: 0
+    minIndexReplicas: 2
     maxIndexReplicas: 2
     scaleUpCPUBoundary: 6000
     scaleUpCooldownSeconds: 240
     scaleUpThresholdDurationSeconds: 180
     scaleDownCPUBoundary: 2000
-    scaleDownCooldownSeconds: 240
+    scaleDownCooldownSeconds: 120
     scaleDownThresholdDurationSeconds: 120
     diskUsagePercentScaledownWatermark: 75
   template:

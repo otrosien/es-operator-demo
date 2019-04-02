@@ -149,7 +149,7 @@ spec:
       serviceAccountName: cdp
       containers:
       - name: es-operator
-        image: registry.opensource.zalan.do/poirot/es-operator:latest
+        image: registry.opensource.zalan.do/poirot/es-operator-test:pr-25-7
         args:
         - --operator-id=microxchg-operator
         - --priority-node-selector=lifecycle-status=ready
