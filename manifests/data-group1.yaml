@@ -20,10 +20,10 @@ spec:
     minIndexReplicas: 0
     maxIndexReplicas: 2
     scaleUpCPUBoundary: 6000
-    scaleUpCooldownSeconds: 180
+    scaleUpCooldownSeconds: 240
     scaleUpThresholdDurationSeconds: 180
     scaleDownCPUBoundary: 2000
-    scaleDownCooldownSeconds: 120
+    scaleDownCooldownSeconds: 240
     scaleDownThresholdDurationSeconds: 120
     diskUsagePercentScaledownWatermark: 75
   template:
