@@ -14,7 +14,7 @@ spec:
   scaling:
     enabled: true
     minReplicas: 3
-    maxReplicas: 3
+    maxReplicas: 4
     minShardsPerNode: 10
     maxShardsPerNode: 20
     minIndexReplicas: 2
