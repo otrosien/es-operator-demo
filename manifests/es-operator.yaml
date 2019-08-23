@@ -115,19 +115,19 @@ spec:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: microxchg
+  name: demo
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: cdp
-  namespace: microxchg
+  namespace: demo
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: es-operator
-  namespace: microxchg
+  namespace: demo
   labels:
     application: es-operator
     version: latest
@@ -149,9 +149,9 @@ spec:
       serviceAccountName: cdp
       containers:
       - name: es-operator
-        image: registry.opensource.zalan.do/poirot/es-operator-test:pr-25-7
+        image: registry.opensource.zalan.do/poirot/es-operator:latest
         args:
-        - --operator-id=microxchg-operator
+        - --operator-id=demo
         - --priority-node-selector=lifecycle-status=ready
         resources:
           limits:

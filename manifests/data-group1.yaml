@@ -2,13 +2,13 @@ apiVersion: zalando.org/v1
 kind: ElasticsearchDataSet
 metadata:
   annotations:
-    es-operator.zalando.org/operator: microxchg-operator
+    es-operator.zalando.org/operator: demo
   labels:
     application: elasticsearch
     group: group1
     role: data
-  name: es-data-microxchg
-  namespace: microxchg
+  name: es-data-demo1
+  namespace: demo
 spec:
   replicas: 3
   scaling:
@@ -31,7 +31,7 @@ spec:
       labels:
         application: elasticsearch
         role: data
-        group: microxchg-group1
+        group: demo1
     spec:
       containers:
       - name: elasticsearch
@@ -41,7 +41,7 @@ spec:
             fieldRef:
               fieldPath: metadata.name
         - name: "node.attr.group"
-          value: "group1"
+          value: "demo1"
         - name: "node.master"
           value: "false"
         - name: "node.data"
