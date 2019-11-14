@@ -1,27 +1,24 @@
 apiVersion: zalando.org/v1
 kind: ElasticsearchDataSet
 metadata:
-  annotations:
-    es-operator.zalando.org/operator: demo
   labels:
     application: elasticsearch
-    group: group1
     role: data
-  name: es-data-demo1
+    group: simple
+  name: es-data1
   namespace: demo
 spec:
-  replicas: 3
   scaling:
     enabled: true
-    minReplicas: 3
+    minReplicas: 1
     maxReplicas: 4
-    minShardsPerNode: 10
-    maxShardsPerNode: 20
-    minIndexReplicas: 2
+    minShardsPerNode: 5
+    maxShardsPerNode: 10
+    minIndexReplicas: 0
     maxIndexReplicas: 2
     scaleUpCPUBoundary: 6000
-    scaleUpCooldownSeconds: 240
-    scaleUpThresholdDurationSeconds: 180
+    scaleUpCooldownSeconds: 60
+    scaleUpThresholdDurationSeconds: 60
     scaleDownCPUBoundary: 2000
     scaleDownCooldownSeconds: 120
     scaleDownThresholdDurationSeconds: 120
@@ -31,8 +28,10 @@ spec:
       labels:
         application: elasticsearch
         role: data
-        group: demo1
+        group: data1
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
       - name: elasticsearch
         env:
@@ -41,12 +40,14 @@ spec:
             fieldRef:
               fieldPath: metadata.name
         - name: "node.attr.group"
-          value: "demo1"
+          value: "data1"
         - name: "node.master"
           value: "false"
         - name: "node.data"
           value: "true"
-        image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.8.1
+        - name: "ES_JAVA_OPTS"
+          value: "-Xmx256m -Xms256m"
+        image: "docker.elastic.co/elasticsearch/elasticsearch-oss:7.4.2"
         ports:
         - containerPort: 9300
           name: transport
@@ -57,14 +58,11 @@ spec:
           timeoutSeconds: 10
         resources:
           limits:
-            cpu: 1000m
-            memory: 1500Mi
+            cpu: 100m
+            memory: 800Mi
           requests:
-            cpu: 1000m
-            memory: 1500Mi
-        securityContext:
-          privileged: true
-          procMount: null
+            cpu: 100m
+            memory: 800Mi
         volumeMounts:
         - mountPath: /usr/share/elasticsearch/data
           name: data
@@ -86,14 +84,12 @@ spec:
             cpu: 50m
             memory: 50Mi
         securityContext:
+          runAsUser: 0
           privileged: true
-      nodeSelector:
-        lifecycle-status: ready
       serviceAccountName: operator
       volumes:
       - name: data
-        emptyDir:
-          medium: Memory
+        emptyDir: {}
       - name: elasticsearch-config
         configMap:
           name: es-config
